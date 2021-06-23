@@ -1,5 +1,8 @@
 package com.buenoezandro.employee.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.buenoezandro.employee.dto.EmployeeDTO;
+import com.buenoezandro.employee.model.Employee;
 import com.buenoezandro.employee.service.EmployeeService;
 
 @RestController
@@ -23,6 +27,12 @@ public class EmployeeController {
 	@Autowired
 	public EmployeeController(EmployeeService employeeService) {
 		this.employeeService = employeeService;
+	}
+
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+		List<Employee> employees = this.employeeService.getAllEmployees();
+		return ResponseEntity.ok().body(employees.stream().map(EmployeeDTO::new).collect(Collectors.toList()));
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

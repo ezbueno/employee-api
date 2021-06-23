@@ -1,5 +1,7 @@
 package com.buenoezandro.employee.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<Employee> getAllEmployees() {
+		return this.employeeRepository.findAll();
 	}
 
 	@Transactional(readOnly = true)
