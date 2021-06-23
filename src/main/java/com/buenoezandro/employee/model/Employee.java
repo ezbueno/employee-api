@@ -15,6 +15,7 @@ import lombok.Data;
 @Entity
 @Table(name = "employees")
 public class Employee implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,4 +30,5 @@ public class Employee implements Serializable {
 
 	@Column(name = "email")
 	private String email;
+	
 }
