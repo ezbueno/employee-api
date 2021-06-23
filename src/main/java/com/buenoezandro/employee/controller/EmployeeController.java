@@ -37,8 +37,8 @@ public class EmployeeController {
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long id) {
-		var employeeId = this.employeeService.getEmployeeById(id);
-		return ResponseEntity.ok().body(new EmployeeDTO(employeeId));
+		var employee = this.employeeService.getEmployeeById(id);
+		return ResponseEntity.ok().body(new EmployeeDTO(employee));
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

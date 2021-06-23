@@ -6,11 +6,11 @@ import com.buenoezandro.employee.dto.EmployeeDTO;
 import com.buenoezandro.employee.model.Employee;
 
 public interface EmployeeService {
-	
-	Employee saveEmployee(EmployeeDTO employeeDTO);
+
+	List<Employee> getAllEmployees();
 
 	Employee getEmployeeById(Long id);
 
-	List<Employee> getAllEmployees();
+	Employee saveEmployee(EmployeeDTO employeeDTO);
 
 }

@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.buenoezandro.employee.dto.EmployeeDTO;
-import com.buenoezandro.employee.exception.ResourceNotFoundException;
 import com.buenoezandro.employee.model.Employee;
 import com.buenoezandro.employee.repository.EmployeeRepository;
 import com.buenoezandro.employee.service.EmployeeService;
+import com.buenoezandro.employee.service.exception.EmployeeNotFoundException;
+import com.buenoezandro.employee.util.MessageUtils;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -31,8 +32,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional(readOnly = true)
 	@Override
 	public Employee getEmployeeById(Long id) {
-		var employeeId = this.employeeRepository.findById(id);
-		return employeeId.orElseThrow(() -> new ResourceNotFoundException(null, null, id));
+		return this.employeeRepository.findById(id)
+				.orElseThrow(() -> new EmployeeNotFoundException(MessageUtils.EMPLOYEE_NOT_FOUND + id));
 	}
 
 	@Transactional
