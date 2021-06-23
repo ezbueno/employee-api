@@ -3,6 +3,8 @@ package com.buenoezandro.employee.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,12 @@ public class EmployeeController {
 	@Autowired
 	public EmployeeController(EmployeeService employeeService) {
 		this.employeeService = employeeService;
+	}
+
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long id) {
+		var employeeId = this.employeeService.getEmployeeById(id);
+		return ResponseEntity.ok().body(new EmployeeDTO(employeeId));
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
