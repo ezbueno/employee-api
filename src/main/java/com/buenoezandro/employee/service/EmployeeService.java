@@ -13,4 +13,8 @@ public interface EmployeeService {
 
 	Employee saveEmployee(EmployeeDTO employeeDTO);
 
+	Employee updateEmployee(Long id, EmployeeDTO employeeDTO);
+	
+	void deleteEmployee(Long id);
+
 }

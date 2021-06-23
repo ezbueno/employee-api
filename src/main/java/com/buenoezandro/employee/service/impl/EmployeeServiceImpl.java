@@ -43,4 +43,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 				new Employee(null, employeeDTO.getFirstName(), employeeDTO.getLastName(), employeeDTO.getEmail()));
 	}
 
+	@Transactional
+	@Override
+	public Employee updateEmployee(Long id, EmployeeDTO employeeDTO) {
+		var employee = this.getEmployeeById(id);
+
+		employee.setFirstName(employeeDTO.getFirstName());
+		employee.setLastName(employeeDTO.getLastName());
+		employee.setEmail(employeeDTO.getEmail());
+
+		return this.employeeRepository.save(employee);
+	}
+
+	@Transactional
+	@Override
+	public void deleteEmployee(Long id) {
+		var employee = this.getEmployeeById(id);
+		this.employeeRepository.deleteById(employee.getId());
+	}
+
 }
