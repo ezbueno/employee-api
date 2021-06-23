@@ -11,7 +11,7 @@
 # Tools and technologies used:
 - Java 11
 - Spring Boot
-- Spring Data JPA ( Hibernate)
+- Spring Data JPA (Hibernate)
 - Lombok
 - H2 Database
 - Eclipse STS
